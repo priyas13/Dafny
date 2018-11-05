@@ -27,7 +27,7 @@ There can be another way to use comman to have multiple input or outputs.
 
 ### Simple example which includes specification 
 As discussed earlier, we know that Dafny comes with a feature of adding high-level annotations which resembles specifications. For the Abs method, it should always return the absolute value of the input which means that it should be always more than or equal to zero. People generally write in comments that method Abs needs to have these properties but what happens in general scenario that these comments gives us nothing. If the method Abs is changed and comment remains same, the method will produce something different at run-time. But if the program is annoted with specification then Dafny will not allow the program to pass until it meets the specifications. 
-Pre and Post conditions are the way to write specifications. Dafny supports the features to write pre and post conditions.
+**_Pre and Post conditions_** are the way to write specifications. Dafny supports the features to write pre and post conditions.
 ```
 method Abs (x : int) returns (z : int)
 ensures 0 <= y 
@@ -36,3 +36,4 @@ ensures 0 <= y
 }
 ```
 **_ensures_** keyword resembles the post condition. Post condition is a part of method declaration and is written before the method body.
+**_requires_** keyword resembles the pre condition. Pre condition is a part of method declaration and is written before the method body.
