@@ -37,3 +37,14 @@ ensures 0 <= y
 ```
 **_ensures_** keyword resembles the post condition. Post condition is a part of method declaration and is written before the method body.
 **_requires_** keyword resembles the pre condition. Pre condition is a part of method declaration and is written before the method body.
+**_Assertions_** As discussed above, pre and post conditions which can be only placed at the start of the program point and ensures that those conditions (post) are true only after the method is completely executed. Dafny also supports features to write specifications that needs to satisfied at particular program point. Assertions are placed at the middle of the program .i.e. in the body of the method. As compared to **_requires_** and **_ensures_** which are placed before the method body, **_assert_** can be placed in the body of the method.
+```
+method testing 
+{
+  assert 1 > 0;
+}
+```
+The above program will pass through because the assertion 1 > 0 is always true at every program point.
+
+### Functions as compared to methods in Dafny
+As discussed above to annotate the assertions about the methods we need to add the variables. Assertions can be written directly in the function without capturing to a local variable.
