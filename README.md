@@ -37,3 +37,40 @@ ensures 0 <= y
 ```
 **_ensures_** keyword resembles the post condition. Post condition is a part of method declaration and is written before the method body.
 **_requires_** keyword resembles the pre condition. Pre condition is a part of method declaration and is written before the method body.
+**_Assertions_** As discussed above, pre and post conditions which can be only placed at the start of the program point and ensures that those conditions (post) are true only after the method is completely executed. Dafny also supports features to write specifications that needs to satisfied at particular program point. Assertions are placed at the middle of the program .i.e. in the body of the method. As compared to **_requires_** and **_ensures_** which are placed before the method body, **_assert_** can be placed in the body of the method.
+```
+method testing 
+{
+  assert 1 > 0;
+}
+```
+The above program will pass through because the assertion 1 > 0 is always true at every program point.
+
+### Functions as compared to methods in Dafny
+As discussed above to annotate the assertions about the methods we need to add the variables. Assertions can be written directly in the function without capturing to a local variable. There are examples in the Examples directory which contains examples illustrating the functions.
+
+### Loop Invariants 
+Dafny supports imperative style of programming, hence it supports while loops. But it is not possible to know in advance how many times the while loop is going to execute. Dafny supports the feature of writing loop invariants which is another kind of annotation for a program. A loop invariant is an expession that holds upon entering a loop, and after every execution of the loop body. 
+```
+var i := 0;
+while i < n
+ invariant 0 <= i 
+ {
+   i := i + 1;
+ }
+```
+In the above piece of code, we could see the job of the while loop is to maintian the positive nature of variable i. Hence we could add the loop invariant 0 <= i. Dafny proves two things (1) When the loop enters the invariant is true (2) The invariant is preserved by the loop
+
+### Termination
+Dafny supports the feature of code termination. The use of **_decreases_** annotation helps to write annotation which helps to get rid of loop from getting executed forever. Dafny helps in providing termination in both loops and recursion. 
+
+### Arrays
+Arrays are build as part of the language. The type of array is array<T> where T is the type of the element of the array. For example the type of array of integers is array<int>. Arrays can be null. Also there are build in methods to play around the array data type like a.Length, a[i] etc. 
+```
+   method Find (a:array<int>, key: int) returns (index: int)
+     ensures 0 <= index ==> index < a.Length && a[index] == key
+   {
+     ...
+   }
+```
+In the above code the post condition is written using ensures. It checks that the correct index is returned for the key provided as input. 
